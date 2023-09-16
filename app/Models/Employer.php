@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\Paiement;
 use App\Models\Departement;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -30,6 +32,9 @@ class Employer extends Model
         {
             return $this->belongsTo(Departement::class);
         }
-       
+        public function payments(): HasMany
+        {
+            return $this->hasMany(Paiement::class);
+        }
     
 }

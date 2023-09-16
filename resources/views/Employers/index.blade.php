@@ -19,16 +19,6 @@
                                 </form>
                                 
                             </div><!--//col-->
-                            <div class="col-auto">
-                                
-                                <select class="form-select w-auto" >
-                                      <option selected value="option-1">All</option>
-                                      <option value="option-2">This week</option>
-                                      <option value="option-3">This month</option>
-                                      <option value="option-4">Last 3 months</option>
-                                      
-                                </select>
-                            </div>
                             <div class="col-auto">						    
                                 <a class="btn app-btn-secondary" href="{{route('employer.create')}}">
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-download me-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -67,6 +57,7 @@
                                             <th class="cell uppercase-text">Nom</th>
                                             <th class="cell uppercase-text">Prenom(s)</th>
                                             <th class="cell uppercase-text">Contact</th>
+                                            <th class="cell uppercase-text">Salaire</th>
                                             <th class="cell uppercase-text" colspan="2">Action</th>
                                         </tr>
                                     </thead>
@@ -82,6 +73,9 @@
                                             <td class="cell"><span>{{ $employer->nom}}</span></td>
                                             <td class="cell">{{ $employer->prenom}}</td>
                                             <td class="cell"><span >{{ $employer->contact}}</span></td>
+                                            <td class="cell">
+                                                <button class="btn btn-success btn-sm text-white">{{ $employer->montant_journalier}} XOF</button>
+                                            </td>
                                             <td class="cell">
                                                 <a href="{{route('employer.edit', $employer->id)}}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="20" fill="blue" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">

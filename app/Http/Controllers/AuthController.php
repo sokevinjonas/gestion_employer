@@ -17,7 +17,8 @@ class AuthController extends Controller
         // dd($request);
         if(Auth::attempt($request->only(['email', 'password'])))
         {
-            return redirect()->route('panel');
+            $request->session()->regenerate();
+            return redirect()->intended(route('panel'));
        }else{
             return redirect()->back()->with('error_msg', 'Paremetre de ressources non reconnue');
         }

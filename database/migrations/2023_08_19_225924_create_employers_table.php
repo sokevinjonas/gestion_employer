@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use App\Models\Departement;
 return new class extends Migration
 {
     /**
@@ -18,11 +19,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->integer('contact')->unique();
             $table->integer('montant_journalier')->nullable();
+            $table->foreignIdFor(Departement::class, 'departement_id');
             $table->timestamps();
 
             // Clé étrangère de Departement
-            $table->uuid('departement_id'); // Utiliser uuid ici
-            $table->foreign('departement_id')->references('id')->on('departements');
+
         });
     }
 

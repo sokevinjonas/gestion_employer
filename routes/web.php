@@ -5,15 +5,19 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PanelController;
 use App\Http\Controllers\EmployerController;
+use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\DepartementController;
 use App\Http\Controllers\ConfigurationController;
 
-Route::get('auth-login', [AuthController::class, 'login_Vue'])->name('login');
+Route::get('auth-login', [AuthController::class, 'login_Vue'])
+    ->name('login');
 
-Route::post('auth-login', [AuthController::class, 'login_traitement'])->name('login_traitement');
+Route::post('auth-login', [AuthController::class, 'login_traitement'])
+    ->name('login_traitement');
 
 Route::get('/validate-account/{email}', [AdminController::class, 'defineAccess']);
-Route::post('/validate-account', [AdminController::class, 'validateAccess'])->name('EmailvalidateAccess');
+Route::post('/validate-account', [AdminController::class, 'validateAccess'])
+        ->name('EmailvalidateAccess');
 
 
 Route::middleware(['auth'])->group(function () {
@@ -76,6 +80,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/delete', [AdminController::class , 'delete'])
         ->name('adminDashboard.delete');
     });
+    Route::prefix('paiement')->group(function(){
+        Route::get('/', [PaiementController::class, 'index'])
+            ->name('paiement.index');
+        Route::get('/lancer-transactions', [PaiementController::class, 'initePaiement'])
+            ->name('paiement.init');
+    });
+
 
     Route::get('/logoutSession', [AuthController::class, 'logout'])->name('logout');
 });
