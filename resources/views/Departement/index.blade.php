@@ -50,9 +50,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($departements as $departement )
-                                            
-                                        
+                                        @forelse ($departements as $departement )                                        
                                         <tr>
                                             <td class="cell">{{$departement->nom}}</td>
                                             <td class="cell">

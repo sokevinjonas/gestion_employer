@@ -64,7 +64,11 @@
                                          
                                         <tr>
                                             <td class="cell">{{$paiement->reference}}</td>
-                                            <td class="cell"><span>{{$paiement->employer->nom . " ".$paiement->employer->prenom  }}</span></td>
+                                            <td class="cell"><span>
+                                                @if ($paiement->employer)
+                                                {{$paiement->employer->nom . " ".$paiement->employer->prenom  }}
+                                                @endif
+                                            </span></td>
                                             <td>
                                                 <button class="btn btn-info btn-sm text-white">
                                                     {{$paiement->montant}}

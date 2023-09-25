@@ -36,6 +36,7 @@ return new class extends Migration
             $table->string('date_annee');
             
             $table->foreignIdFor(Employer::class, 'employer_id');
+            $table->timestamps();
         });
     }
 

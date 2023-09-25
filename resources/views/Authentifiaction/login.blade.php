@@ -14,7 +14,7 @@
     @csrf
     @method('POST')
 
-    {{-- {{Hash::make('123456')}} --}}
+     <!-- {{Hash::make('1234')}}  -->
     <div class="box">
         <h1>Espace de Connexion</h1>
         @if (Session::get('error_msg'))

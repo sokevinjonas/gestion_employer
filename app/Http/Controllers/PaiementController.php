@@ -12,24 +12,36 @@ use App\Models\Configuration;
 class PaiementController extends Controller
 {
     public function index(){
-    $paiements = Paiement::latest()->orderBy('id', 'desc')->paginate(5);
-    $paymentDate = Configuration::where('type', 'PAYMENT_DATE')->first();
-    $dt_pai = $paymentDate->value;
-    $dtConverted_pai = intval($dt_pai);
-    $date_jour = date('d');
-    $dateConverted_jour = intval($date_jour);
-    $date_transaction = false;
-
-    if($dateConverted_jour === $dtConverted_pai){
-        $date_transaction = true;
-    }else{
+        // Récupère les paiements les plus récents, les ordonne par 'id' de manière décroissante et les pagine par lots de 5.
+        $paiements = Paiement::latest()->orderBy('id', 'desc')->paginate(5);
+    
+        // Récupère la date de paiement à partir de la table 'Configuration' où le type est 'PAYMENT_DATE'.
+        $paymentDate = Configuration::where('type', 'PAYMENT_DATE')->first();
+    
+        // Convertit la valeur de la date de paiement en un entier.
+        $dt_pai = $paymentDate->value;
+        $dtConverted_pai = intval($dt_pai);
+    
+        // Obtient le jour actuel du mois.
+        $date_jour = date('d');
+        $dateConverted_jour = intval($date_jour);
+    
         $date_transaction = false;
-        // dd($date_transaction);
+    
+        // Vérifie si le jour actuel du mois correspond à la date de paiement configurée.
+        if ($dateConverted_jour === $dtConverted_pai) {
+            $date_transaction = true;
+        } else {
+            $date_transaction = false;
+            // Si les dates ne correspondent pas, vous pouvez ajouter un message de débogage avec 'dd($date_transaction)'.
+        }
+    
+        // Retourne la vue 'Paiement.index' avec les paiements et l'indicateur de date de transaction.
+        return view('Paiement.index', compact('paiements', 'date_transaction'));
     }
-        return view('Paiement.index',compact('paiements','date_transaction'));
-    }
-
+    
     public function initePaiement() {
+        // Initialise un tableau de correspondance entre les noms des mois en anglais et en français.
         $Listemois = [
             'JANUARY' => 'JANVIER',
             'FEBRUARY' => 'FÉVRIER',
@@ -44,6 +56,10 @@ class PaiementController extends Controller
             'NOVEMBER' => 'NOVEMBRE',
             'DECEMBER' => 'DÉCEMBRE'
         ];
+        
+        // Vous pouvez maintenant utiliser le tableau $Listemois pour faire des traductions entre les noms des mois en anglais et en français.
+    
+    
         
         // Obtenir le nom du mois actuel en anglais en utilisant Carbon (une bibliothèque pour gérer les dates et heures en PHP)
         $recupMoisEn = strtoupper(Carbon::now()->formatLocalized('%B'));
